@@ -8,6 +8,7 @@
 
 <style>
 
+/* ---------------- GENERAL ---------------- */
 *{
     margin:0;
     padding:0;
@@ -49,13 +50,6 @@ nav a{
     background:#3498db;
     padding:10px 18px;
     border-radius:8px;
-    transition:0.3s;
-    font-weight:bold;
-}
-
-nav a:hover{
-    background:#5dade2;
-    transform:scale(1.05);
 }
 
 /* MAIN */
@@ -72,32 +66,20 @@ main h1{
     margin-bottom:25px;
 }
 
-/* CONTENEDOR */
+/* GRID */
 .contenedor{
     display:grid;
     grid-template-columns:1fr 3fr;
     gap:20px;
 }
 
-/* SIDEBAR */
-.sidebar{
-    display:flex;
-    flex-direction:column;
-    gap:20px;
-}
-
-/* FORMULARIO */
+/* FORM */
 .formulario{
     background:#3498db;
     border:4px solid black;
     border-radius:15px;
     padding:20px;
     color:white;
-}
-
-.formulario h2{
-    text-align:center;
-    margin-bottom:15px;
 }
 
 .formulario input,
@@ -107,33 +89,19 @@ main h1{
     margin-bottom:12px;
     border:none;
     border-radius:8px;
-    font-size:15px;
-}
-
-.formulario textarea{
-    resize:none;
-    height:90px;
 }
 
 .formulario button{
     width:100%;
     padding:12px;
-    border:none;
-    border-radius:10px;
     background:#222;
     color:white;
-    font-size:16px;
+    border:none;
+    border-radius:10px;
     cursor:pointer;
-    transition:0.3s;
-    font-weight:bold;
 }
 
-.formulario button:hover{
-    background:white;
-    color:#222;
-}
-
-/* CAJA BUSCADOR */
+/* BUSCADOR */
 .caja{
     background:#3498db;
     border:4px solid black;
@@ -146,11 +114,9 @@ main h1{
     padding:15px;
     border:none;
     border-radius:10px;
-    font-size:16px;
-    outline:none;
 }
 
-/* CONTENIDO */
+/* LISTA */
 .contenido{
     background:#fafafa;
     border:3px solid black;
@@ -158,28 +124,36 @@ main h1{
     padding:20px;
 }
 
-/* CARDS */
+/* CARD */
 .card{
     background:white;
     border-left:10px solid #3498db;
     border-radius:12px;
     padding:20px;
     margin-bottom:20px;
-    box-shadow:0px 0px 10px rgba(0,0,0,0.1);
-    transition:0.3s;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
-.card:hover{
-    transform:translateY(-5px);
+/* BOTONES */
+.btn-eliminar{
+    margin-top:10px;
+    background:red;
+    color:white;
+    border:none;
+    padding:8px;
+    border-radius:6px;
+    cursor:pointer;
 }
 
-.card h2{
-    margin-bottom:12px;
-    color:#222;
-}
-
-.card p{
-    margin:6px 0;
+.btn-editar{
+    margin-top:10px;
+    margin-left:10px;
+    background:orange;
+    color:white;
+    border:none;
+    padding:8px;
+    border-radius:6px;
+    cursor:pointer;
 }
 
 /* FOOTER */
@@ -192,244 +166,109 @@ footer{
     border-top:5px solid #3498db;
 }
 
-footer h3{
-    color:#3498db;
-    margin-bottom:10px;
-}
-
 </style>
+
 </head>
 
 <body>
 
-<!-- HEADER -->
-<header>
-    👨‍⚕️ Pacientes
-</header>
+<header>👨‍⚕️ Pacientes</header>
 
-<!-- NAV -->
 <nav>
-
     <ul>
-
         <li><a href="index.html">Inicio</a></li>
-
         <li><a href="Doctores.html">Doctores</a></li>
-
         <li><a href="Medicamentos.html">Medicamentos</a></li>
-
     </ul>
-
 </nav>
 
-<!-- MAIN -->
 <main>
 
-    <h1>Lista de Pacientes</h1>
+<h1>Lista de Pacientes</h1>
 
-    <div class="contenedor">
+<div class="contenedor">
 
-        <!-- IZQUIERDA -->
-        <div class="sidebar">
+    <!-- FORM -->
+    <div>
 
-            <!-- FORMULARIO -->
-            <div class="formulario">
+        <div class="formulario">
 
-                <h2>➕ Agregar Paciente</h2>
+            <h2>➕ Agregar Paciente</h2>
 
-                <input type="text" id="nombre" placeholder="Nombre">
+            <input type="text" id="nombre" placeholder="Nombre">
+            <input type="text" id="edad" placeholder="Edad">
+            <input type="text" id="sexo" placeholder="Sexo">
+            <input type="text" id="ocupacion" placeholder="Ocupación">
+            <textarea id="diagnostico" placeholder="Diagnóstico"></textarea>
+            <textarea id="tratamiento" placeholder="Tratamiento"></textarea>
 
-                <input type="text" id="edad" placeholder="Edad">
-
-                <input type="text" id="sexo" placeholder="Sexo">
-
-                <input type="text" id="ocupacion" placeholder="Ocupación">
-
-                <textarea id="diagnostico" placeholder="Diagnóstico"></textarea>
-
-                <textarea id="tratamiento" placeholder="Tratamiento"></textarea>
-
-                <button onclick="agregarPaciente()">
-                    Guardar Paciente
-                </button>
-
-            </div>
-
-            <!-- BUSCADOR -->
-            <div class="caja">
-
-                <input 
-                    type="text" 
-                    id="buscar" 
-                    placeholder="🔍 Buscar paciente..."
-                >
-
-            </div>
+            <button onclick="agregarPaciente()">Guardar Paciente</button>
 
         </div>
 
-        <!-- DERECHA -->
-        <div class="contenido" id="listaPacientes">
-
-            <!-- PACIENTE 1 -->
-            <div class="card">
-                <h2>Carlos Ramírez Torres</h2>
-
-                <p><strong>Edad:</strong> 60 años</p>
-                <p><strong>Sexo:</strong> Masculino</p>
-                <p><strong>Ocupación:</strong> Jubilado</p>
-                <p><strong>Diagnóstico:</strong> Diabetes mal controlada</p>
-                <p><strong>Tratamiento:</strong> Ajuste de Metformina</p>
-            </div>
-
-            <!-- PACIENTE 2 -->
-            <div class="card">
-                <h2>Ana Martínez Díaz</h2>
-
-                <p><strong>Edad:</strong> 27 años</p>
-                <p><strong>Sexo:</strong> Femenino</p>
-                <p><strong>Ocupación:</strong> Enfermera</p>
-                <p><strong>Diagnóstico:</strong> Infección urinaria</p>
-                <p><strong>Tratamiento:</strong> Nitrofurantoína</p>
-            </div>
-
-            <!-- PACIENTE 3 -->
-            <div class="card">
-                <h2>Luis Fernández Soto</h2>
-
-                <p><strong>Edad:</strong> 50 años</p>
-                <p><strong>Sexo:</strong> Masculino</p>
-                <p><strong>Ocupación:</strong> Comerciante</p>
-                <p><strong>Diagnóstico:</strong> Angina estable</p>
-                <p><strong>Tratamiento:</strong> Estudios cardiológicos</p>
-            </div>
-
-            <!-- PACIENTE 4 -->
-            <div class="card">
-                <h2>Laura Méndez Castro</h2>
-
-                <p><strong>Edad:</strong> 38 años</p>
-                <p><strong>Sexo:</strong> Femenino</p>
-                <p><strong>Ocupación:</strong> Abogada</p>
-                <p><strong>Diagnóstico:</strong> Hipotiroidismo</p>
-                <p><strong>Tratamiento:</strong> Levotiroxina</p>
-            </div>
-
-            <!-- PACIENTE 5 -->
-            <div class="card">
-                <h2>Pedro Sánchez Molina</h2>
-
-                <p><strong>Edad:</strong> 29 años</p>
-                <p><strong>Sexo:</strong> Masculino</p>
-                <p><strong>Ocupación:</strong> Ingeniero</p>
-                <p><strong>Diagnóstico:</strong> Faringitis aguda</p>
-                <p><strong>Tratamiento:</strong> Paracetamol</p>
-            </div>
-
-            <!-- PACIENTE 6 -->
-            <div class="card">
-                <h2>Sofía Herrera León</h2>
-
-                <p><strong>Edad:</strong> 41 años</p>
-                <p><strong>Sexo:</strong> Femenino</p>
-                <p><strong>Ocupación:</strong> Secretaria</p>
-                <p><strong>Diagnóstico:</strong> Migraña</p>
-                <p><strong>Tratamiento:</strong> Sumatriptán</p>
-            </div>
-
-            <!-- PACIENTE 7 -->
-            <div class="card">
-                <h2>Diego Morales Cruz</h2>
-
-                <p><strong>Edad:</strong> 55 años</p>
-                <p><strong>Sexo:</strong> Masculino</p>
-                <p><strong>Ocupación:</strong> Chofer</p>
-                <p><strong>Diagnóstico:</strong> Gonartrosis</p>
-                <p><strong>Tratamiento:</strong> Fisioterapia</p>
-            </div>
-
-            <!-- PACIENTE 8 -->
-            <div class="card">
-                <h2>Valentina Rojas Núñez</h2>
-
-                <p><strong>Edad:</strong> 24 años</p>
-                <p><strong>Sexo:</strong> Femenino</p>
-                <p><strong>Ocupación:</strong> Estudiante</p>
-                <p><strong>Diagnóstico:</strong> Anemia ferropénica</p>
-                <p><strong>Tratamiento:</strong> Sulfato ferroso</p>
-            </div>
-
-            <!-- PACIENTE 9 -->
-            <div class="card">
-                <h2>Fernando López García</h2>
-
-                <p><strong>Edad:</strong> 46 años</p>
-                <p><strong>Sexo:</strong> Masculino</p>
-                <p><strong>Ocupación:</strong> Maestro</p>
-                <p><strong>Diagnóstico:</strong> Hipertensión</p>
-                <p><strong>Tratamiento:</strong> Losartán y dieta baja en sal</p>
-            </div>
-
-            <!-- PACIENTE 10 -->
-            <div class="card">
-                <h2>Mariana Torres Vega</h2>
-
-                <p><strong>Edad:</strong> 33 años</p>
-                <p><strong>Sexo:</strong> Femenino</p>
-                <p><strong>Ocupación:</strong> Diseñadora gráfica</p>
-                <p><strong>Diagnóstico:</strong> Gastritis</p>
-                <p><strong>Tratamiento:</strong> Omeprazol y dieta blanda</p>
-            </div>
-
+        <div class="caja">
+            <input type="text" id="buscar" placeholder="🔍 Buscar paciente...">
         </div>
 
     </div>
 
+    <!-- LISTA -->
+    <div class="contenido" id="listaPacientes"></div>
+
+</div>
+
 </main>
 
-<!-- FOOTER -->
 <footer>
-
     <h3>Datos del Alumno</h3>
-
     <p>Kevin Raul Gonzalez Chavez</p>
-
     <p>No. Control: 23308051280594</p>
-
     <p>Grupo: 4-I</p>
-
-    <p>Especialidad: Programación</p>
-
 </footer>
 
 <script>
 
-/* BUSCADOR */
+/* ---------------- INICIALIZAR 10 PACIENTES ---------------- */
+window.onload = function(){
 
-const buscar = document.getElementById("buscar");
+    let lista = JSON.parse(localStorage.getItem("pacientes"));
 
-buscar.addEventListener("keyup", function(){
+    if(!lista || lista.length === 0){
 
-    let texto = buscar.value.toLowerCase();
+        lista = [
+            {nombre:"Carlos Ramírez Torres", edad:"60", sexo:"Masculino", ocupacion:"Jubilado", diagnostico:"Diabetes", tratamiento:"Metformina"},
+            {nombre:"Ana Martínez Díaz", edad:"27", sexo:"Femenino", ocupacion:"Enfermera", diagnostico:"Infección urinaria", tratamiento:"Nitrofurantoína"},
+            {nombre:"Luis Fernández Soto", edad:"50", sexo:"Masculino", ocupacion:"Comerciante", diagnostico:"Angina", tratamiento:"Control cardiaco"},
+            {nombre:"Laura Méndez Castro", edad:"38", sexo:"Femenino", ocupacion:"Abogada", diagnostico:"Hipotiroidismo", tratamiento:"Levotiroxina"},
+            {nombre:"Pedro Sánchez Molina", edad:"29", sexo:"Masculino", ocupacion:"Ingeniero", diagnostico:"Faringitis", tratamiento:"Paracetamol"},
+            {nombre:"Sofía Herrera León", edad:"41", sexo:"Femenino", ocupacion:"Secretaria", diagnostico:"Migraña", tratamiento:"Sumatriptán"},
+            {nombre:"Diego Morales Cruz", edad:"55", sexo:"Masculino", ocupacion:"Chofer", diagnostico:"Gonartrosis", tratamiento:"Fisioterapia"},
+            {nombre:"Valentina Rojas Núñez", edad:"24", sexo:"Femenino", ocupacion:"Estudiante", diagnostico:"Anemia", tratamiento:"Hierro"},
+            {nombre:"Fernando López García", edad:"46", sexo:"Masculino", ocupacion:"Maestro", diagnostico:"Hipertensión", tratamiento:"Losartán"},
+            {nombre:"Mariana Torres Vega", edad:"33", sexo:"Femenino", ocupacion:"Diseñadora", diagnostico:"Gastritis", tratamiento:"Omeprazol"}
+        ];
 
+        localStorage.setItem("pacientes", JSON.stringify(lista));
+    }
+
+    cargarPacientes();
+};
+
+/* ---------------- BUSCADOR ---------------- */
+document.getElementById("buscar").addEventListener("keyup", function(){
+
+    let texto = this.value.toLowerCase();
     let cards = document.querySelectorAll(".card");
 
-    cards.forEach(function(card){
-
-        let contenido = card.textContent.toLowerCase();
-
-        if(contenido.includes(texto)){
-            card.style.display = "block";
-        }else{
-            card.style.display = "none";
-        }
-
+    cards.forEach(card => {
+        card.style.display = card.textContent.toLowerCase().includes(texto)
+        ? "block"
+        : "none";
     });
 
 });
 
-/* AGREGAR PACIENTE */
-
+/* ---------------- AGREGAR ---------------- */
 function agregarPaciente(){
 
     let nombre = document.getElementById("nombre").value;
@@ -439,50 +278,110 @@ function agregarPaciente(){
     let diagnostico = document.getElementById("diagnostico").value;
     let tratamiento = document.getElementById("tratamiento").value;
 
-    if(
-        nombre == "" ||
-        edad == "" ||
-        sexo == "" ||
-        ocupacion == "" ||
-        diagnostico == "" ||
-        tratamiento == ""
-    ){
-        alert("⚠️ Completa todos los campos");
+    if(!nombre || !edad || !sexo || !ocupacion || !diagnostico || !tratamiento){
+        alert("⚠️ Llena todos los campos");
         return;
     }
 
-    let nuevaCard = document.createElement("div");
+    let paciente = {nombre, edad, sexo, ocupacion, diagnostico, tratamiento};
 
-    nuevaCard.classList.add("card");
+    let lista = JSON.parse(localStorage.getItem("pacientes")) || [];
+    lista.push(paciente);
 
-    nuevaCard.innerHTML = `
-    
-        <h2>${nombre}</h2>
+    localStorage.setItem("pacientes", JSON.stringify(lista));
 
-        <p><strong>Edad:</strong> ${edad}</p>
+    crearCard(paciente);
+    limpiar();
+}
 
-        <p><strong>Sexo:</strong> ${sexo}</p>
+/* ---------------- CREAR CARD ---------------- */
+function crearCard(p){
 
-        <p><strong>Ocupación:</strong> ${ocupacion}</p>
+    let div = document.createElement("div");
+    div.classList.add("card");
 
-        <p><strong>Diagnóstico:</strong> ${diagnostico}</p>
+    div.innerHTML = `
+        <h2>${p.nombre}</h2>
+        <p><strong>Edad:</strong> ${p.edad}</p>
+        <p><strong>Sexo:</strong> ${p.sexo}</p>
+        <p><strong>Ocupación:</strong> ${p.ocupacion}</p>
+        <p><strong>Diagnóstico:</strong> ${p.diagnostico}</p>
+        <p><strong>Tratamiento:</strong> ${p.tratamiento}</p>
 
-        <p><strong>Tratamiento:</strong> ${tratamiento}</p>
-
+        <button class="btn-eliminar" onclick="eliminar(this)">Eliminar</button>
+        <button class="btn-editar" onclick="editar(this)">Editar</button>
     `;
 
-    document.getElementById("listaPacientes").appendChild(nuevaCard);
+    document.getElementById("listaPacientes").appendChild(div);
+}
 
-    /* LIMPIAR FORMULARIO */
+/* ---------------- ELIMINAR ---------------- */
+function eliminar(btn){
+
+    let card = btn.parentElement;
+    let nombre = card.querySelector("h2").textContent;
+
+    let lista = JSON.parse(localStorage.getItem("pacientes")) || [];
+
+    lista = lista.filter(p => p.nombre !== nombre);
+
+    localStorage.setItem("pacientes", JSON.stringify(lista));
+
+    document.getElementById("listaPacientes").innerHTML = "";
+    cargarPacientes();
+}
+
+/* ---------------- EDITAR ---------------- */
+function editar(btn){
+
+    let card = btn.parentElement;
+    let nombre = card.querySelector("h2").textContent;
+
+    let lista = JSON.parse(localStorage.getItem("pacientes")) || [];
+
+    lista = lista.map(p => {
+
+        if(p.nombre === nombre){
+
+            return {
+                nombre,
+                edad: prompt("Nueva edad:", p.edad),
+                sexo: prompt("Nuevo sexo:", p.sexo),
+                ocupacion: prompt("Nueva ocupación:", p.ocupacion),
+                diagnostico: prompt("Nuevo diagnóstico:", p.diagnostico),
+                tratamiento: prompt("Nuevo tratamiento:", p.tratamiento)
+            };
+
+        }
+
+        return p;
+    });
+
+    localStorage.setItem("pacientes", JSON.stringify(lista));
+
+    document.getElementById("listaPacientes").innerHTML = "";
+    cargarPacientes();
+}
+
+/* ---------------- CARGAR ---------------- */
+function cargarPacientes(){
+
+    let lista = JSON.parse(localStorage.getItem("pacientes")) || [];
+
+    document.getElementById("listaPacientes").innerHTML = "";
+
+    lista.forEach(p => crearCard(p));
+}
+
+/* ---------------- LIMPIAR ---------------- */
+function limpiar(){
+
     document.getElementById("nombre").value = "";
     document.getElementById("edad").value = "";
     document.getElementById("sexo").value = "";
     document.getElementById("ocupacion").value = "";
     document.getElementById("diagnostico").value = "";
     document.getElementById("tratamiento").value = "";
-
-    alert("✅ Paciente agregado correctamente");
-
 }
 
 </script>
