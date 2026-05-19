@@ -1,175 +1,261 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctores</title>
+    <style>
+        /* RESET GENERAL */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-<title>Doctores</title>
+        html {
+            scroll-behavior: smooth;
+        }
 
-<style>
+        /* IMAGEN DE FONDO FIJA PARA TODA LA INTERFAZ */
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.45)), 
+                        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1920') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+        }
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
-}
+        /* BARRA DE NAVEGACIÓN SUPERIOR TRANSLÚCIDA */
+        header.site-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 50px;
+            background: rgba(15, 20, 30, 0.3); 
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
 
-body{
-    background: #f4f4f4;
-}
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: #ffffff;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+        }
 
-/* ENCABEZADO */
-header{
-    background: #27ae60;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    font-size: 28px;
-    font-weight: bold;
-    border-bottom: 5px solid #222;
-}
+        nav a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s, border-bottom 0.3s;
+            padding-bottom: 5px;
+        }
 
-/* NAV */
-nav{
-    background: #222;
-    padding: 15px;
-}
+        nav a:hover {
+            color: #ffffff;
+            border-bottom: 2px solid #ffffff;
+        }
 
-nav ul{
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
+        /* CONTENEDOR PRINCIPAL */
+        main {
+            width: 90%;
+            max-width: 1300px;
+            margin: 140px auto 40px auto;
+            padding: 20px;
+        }
 
-nav ul li a{
-    text-decoration: none;
-    color: white;
-    background: #27ae60;
-    padding: 10px 18px;
-    border-radius: 8px;
-    transition: 0.3s;
-    font-weight: bold;
-}
+        main h1 {
+            text-align: center;
+            margin-bottom: 35px;
+            font-size: 3rem;
+            font-weight: 600;
+            text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.6);
+            letter-spacing: -0.5px;
+        }
 
-nav ul li a:hover{
-    background: #58d68d;
-    transform: scale(1.05);
-}
+        /* DISTRIBUCIÓN EN REJILLA */
+        .contenedor {
+            display: grid;
+            grid-template-columns: 1fr 2.5fr;
+            gap: 30px;
+        }
 
-/* MAIN */
-main{
-    width: 90%;
-    margin: 30px auto;
-    background: white;
-    border: 5px solid black;
-    padding: 20px;
-}
+        /* COLUMNA IZQUIERDA (SIDEBAR) */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
 
-main h1{
-    text-align: center;
-    margin-bottom: 25px;
-    color: #222;
-}
+        /* MARQUITOS TRANSPARENTES ESTILO CRISTAL */
+        .caja {
+            background: rgba(15, 22, 36, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
 
-/* ESTRUCTURA */
-.contenedor{
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    gap: 20px;
-}
+        .caja h3 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #ffffff;
+        }
 
-/* SIDEBAR */
-.sidebar{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
+        /* INPUT TRANSLÚCIDO PARA EL BUSCADOR */
+        .caja input {
+            width: 100%;
+            padding: 14px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            font-size: 15px;
+            background: rgba(255, 255, 255, 0.07);
+            color: #ffffff;
+            outline: none;
+            transition: border-color 0.3s, background 0.3s;
+        }
 
-.caja{
-    background: #27ae60;
-    height: 180px;
-    border: 3px solid black;
-    border-radius: 10px;
-}
+        .caja input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
 
-/* CONTENIDO */
-.contenido{
-    background: #fafafa;
-    border: 3px solid black;
-    padding: 20px;
-    border-radius: 10px;
-}
+        .caja input:focus {
+            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.12);
+        }
 
-/* TARJETAS */
-.card{
-    background: white;
-    border-left: 10px solid #27ae60;
-    padding: 20px;
-    margin-bottom: 25px;
-    border-radius: 12px;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-    transition: 0.3s;
-}
+        /* LISTA INFORMATIVA DEL SIDEBAR */
+        .info-lista {
+            list-style: none;
+        }
 
-.card:hover{
-    transform: translateY(-5px);
-}
+        .info-lista li {
+            padding: 8px 0;
+            font-size: 0.95rem;
+            color: #e5e7eb;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
 
-.card h2{
-    color: #222;
-    margin-bottom: 15px;
-}
+        .info-lista li:last-child {
+            border-bottom: none;
+        }
 
-.card p{
-    margin: 8px 0;
-    line-height: 1.5;
-}
+        /* COLUMNA DERECHA (CONTENEDOR DE TARJETAS) */
+        .contenido {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
 
-/* FOOTER */
-footer{
-    background: #222;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    margin-top: 30px;
-    border-top: 5px solid #27ae60;
-}
+        /* TARJETAS DE DOCTORES TOTALMENTE INTEGRADAS */
+        .card {
+            background: rgba(15, 22, 36, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 5px solid #ffffff; /* Línea blanca lateral premium */
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+        }
 
-footer h3{
-    color: #27ae60;
-    margin-bottom: 10px;
-}
+        .card:hover {
+            transform: translateY(-5px);
+            border-left-color: #93c5fd; /* Transición sutil de color */
+            background: rgba(20, 29, 46, 0.45);
+        }
 
-</style>
+        .card h2 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .card p {
+            margin: 8px 0;
+            font-size: 1.02rem;
+            color: #e5e7eb;
+            line-height: 1.6;
+        }
+
+        .card p strong {
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+            margin-right: 5px;
+        }
+
+        /* FOOTER TRANSPARENTE */
+        footer {
+            background: rgba(10, 15, 26, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #e5e7eb;
+            text-align: center;
+            padding: 50px 20px;
+            margin-top: 80px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 -5px 25px rgba(0,0,0,0.2);
+        }
+
+        footer h3 {
+            color: #ffffff;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        footer p {
+            margin: 8px 0;
+            font-size: 0.95rem;
+        }
+
+        /* DISEÑO RESPONSIVO */
+        @media(max-width: 960px) {
+            header.site-header {
+                padding: 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+            nav a {
+                margin: 0 10px;
+                font-size: 0.9rem;
+            }
+            main {
+                margin-top: 180px;
+            }
+            .contenedor {
+                grid-template-columns: 1fr;
+            }
+            main h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-<!-- ENCABEZADO -->
-<header>
-
-    🩺 Doctores
-
+<header class="site-header">
+    <div class="logo">🩺 Doctores</div>
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="Pacientes.html">Pacientes</a>
+        <a href="Medicamentos.html">Medicamentos</a>
+    </nav>
 </header>
 
-<!-- NAV -->
-<nav>
-
-    <ul>
-
-        <li><a href="index.html">Inicio</a></li>
-
-        <li><a href="Pacientes.html">Pacientes</a></li>
-
-        <li><a href="Medicamentos.html">Medicamentos</a></li>
-
-    </ul>
-
-</nav>
-
-<!-- CONTENIDO PRINCIPAL -->
 <main>
 
     <h1>Lista de Doctores</h1>
@@ -178,20 +264,27 @@ footer h3{
 
         <div class="sidebar">
 
-            <div class="caja"></div>
+            <div class="caja">
+                <h3>🔍 Filtrar Especialistas</h3>
+                <input type="text" id="buscarDoctor" placeholder="Buscar por nombre o área...">
+            </div>
 
-            <div class="caja"></div>
+            <div class="caja">
+                <h3>📊 Resumen Clínico</h3>
+                <ul class="info-lista">
+                    <li>• Especialistas Activos: 4</li>
+                    <li>• Cobertura: 24 Horas</li>
+                    <li>• Guardias programadas: Ok</li>
+                    <li>• Sincronización: Nube</li>
+                </ul>
+            </div>
 
         </div>
 
-        <!-- CONTENIDO -->
-        <div class="contenido">
+        <div class="contenido" id="listaDoctores">
 
-            <!-- DOCTORES -->
             <div class="card">
-
                 <h2>Dra. María González Ruiz</h2>
-
                 <p><strong>ID:</strong> D001</p>
                 <p><strong>Edad:</strong> 39 años</p>
                 <p><strong>Sexo:</strong> Femenino</p>
@@ -200,13 +293,11 @@ footer h3{
                 <p><strong>Teléfono:</strong> 555-234-5678</p>
                 <p><strong>Correo:</strong> maria.gonzalez@consultorio.com</p>
                 <p><strong>Horario:</strong> Lunes a Viernes 14:00 - 20:00</p>
-               <p><strong>Pacientes asignados:</strong> Ana Martínez Díaz, Mariana Torres Vega, Valentina Rojas Núñez</p>
+                <p><strong>Pacientes asignados:</strong> Ana Martínez Díaz, Mariana Torres Vega, Valentina Rojas Núñez</p>
             </div>
 
             <div class="card">
-
                 <h2>Dr. Roberto Sánchez Díaz</h2>
-
                 <p><strong>ID:</strong> D002</p>
                 <p><strong>Edad:</strong> 50 años</p>
                 <p><strong>Sexo:</strong> Masculino</p>
@@ -216,13 +307,10 @@ footer h3{
                 <p><strong>Correo:</strong> roberto.sanchez@consultorio.com</p>
                 <p><strong>Horario:</strong> Martes y Jueves 9:00 - 15:00</p>
                 <p><strong>Pacientes asignados:</strong> Luis Fernández Soto, Fernando López García, Diego Morales Cruz</p>
-
             </div>
 
             <div class="card">
-
                 <h2>Dra. Laura Martínez Castro</h2>
-
                 <p><strong>ID:</strong> D003</p>
                 <p><strong>Edad:</strong> 42 años</p>
                 <p><strong>Sexo:</strong> Femenino</p>
@@ -232,17 +320,14 @@ footer h3{
                 <p><strong>Correo:</strong> laura.martinez@consultorio.com</p>
                 <p><strong>Horario:</strong> Lunes, Miércoles y Viernes 10:00 - 16:00</p>
                 <p><strong>Pacientes asignados:</strong> Carlos Ramírez Torres, Laura Méndez Castro, Valentina Rojas Núñez, Pedro Sánchez Molina</p>
-
             </div>
 
             <div class="card">
-
                 <h2>Dr. Alejandro Torres Medina</h2>
-
                 <p><strong>ID:</strong> D004</p>
                 <p><strong>Edad:</strong> 45 años</p>
                 <p><strong>Sexo:</strong> Masculino</p>
-                <p><strong>Especialidad:</strong> Neurología</p>
+                <p><strong>Neurología:</strong> Neurología</p>
                 <p><strong>Cédula Profesional:</strong> 5678901</p>
                 <p><strong>Teléfono:</strong> 555-567-8901</p>
                 <p><strong>Correo:</strong> alejandro.torres@consultorio.com</p>
@@ -256,20 +341,31 @@ footer h3{
 
 </main>
 
-<!-- FOOTER -->
 <footer>
-
     <h3>Datos del Alumno</h3>
-
-    <p>Kevin Raul Gonzalez Chavez</p>
-
-    <p>No. Control: 23308051280594</p>
-
-    <p>Grupo: 4-I</p>
-
-    <p>Especialidad: Programación</p>
-
+    <p><strong>Nombre:</strong> Kevin Raul Gonzalez Chavez</p>
+    <p><strong>No. Control:</strong> 23308051280594</p>
+    <p><strong>Grupo:</strong> 4-I</p>
+    <p><strong>Especialidad:</strong> Programación</p>
 </footer>
+
+<script>
+const buscarDoctor = document.getElementById("buscarDoctor");
+
+buscarDoctor.addEventListener("keyup", function(){
+    let filtro = buscarDoctor.value.toLowerCase();
+    let cards = document.querySelectorAll(".card");
+
+    cards.forEach(function(card){
+        let textoCard = card.textContent.toLowerCase();
+        if(textoCard.includes(filtro)){
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+    });
+});
+</script>
 
 </body>
 </html>
