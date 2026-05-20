@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medicamentos</title>
+    <title>Pacientes</title>
     <style>
         /* RESET GENERAL */
         * {
@@ -81,56 +81,22 @@
             letter-spacing: -0.5px;
         }
 
-        /* BARRA DE BÚSQUEDA INTEGRADA EN EL ESTILO */
-        .buscador {
-            width: 100%;
-            margin-bottom: 35px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .buscador input {
-            width: 100%;
-            max-width: 600px;
-            padding: 15px 20px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 50px; /* Bordes totalmente redondeados para hacer match con el botón principal */
-            font-size: 16px;
-            background: rgba(15, 22, 36, 0.5);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            color: #ffffff;
-            outline: none;
-            text-align: center;
-            transition: 0.3s;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-        }
-
-        .buscador input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .buscador input:focus {
-            border-color: rgba(255, 255, 255, 0.4);
-            background: rgba(20, 29, 46, 0.6);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-        }
-
-        /* ESTRUCTURA DE CONTENIDO */
+        /* DISTRIBUCIÓN EN REJILLA */
         .contenedor {
             display: grid;
             grid-template-columns: 1fr 2.5fr;
             gap: 30px;
         }
 
-        /* LADO IZQUIERDO (SIDEBAR) */
+        /* BARRA LATERAL (SIDEBAR) */
         .sidebar {
             display: flex;
             flex-direction: column;
             gap: 25px;
         }
 
-        .caja {
+        /* CONTENEDORES ESTILO CRISTAL BLUR */
+        .formulario, .caja {
             background: rgba(15, 22, 36, 0.4);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
@@ -140,51 +106,96 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
-        .caja h3 {
-            margin-bottom: 15px;
-            font-size: 1.2rem;
+        .formulario h2 {
+            font-size: 1.3rem;
             font-weight: 500;
+            text-align: center;
+            margin-bottom: 20px;
             color: #ffffff;
         }
 
-        .info-lista {
-            list-style: none;
+        /* ENTRADAS DE TEXTO TRANSLÚCIDAS */
+        .formulario input,
+        .formulario textarea,
+        .caja input {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            font-size: 15px;
+            background: rgba(255, 255, 255, 0.07);
+            color: #ffffff;
+            outline: none;
+            transition: border-color 0.3s, background 0.3s;
         }
 
-        .info-lista li {
-            padding: 8px 0;
-            font-size: 0.95rem;
-            color: #e5e7eb;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        .formulario input::placeholder,
+        .formulario textarea::placeholder,
+        .caja input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
         }
 
-        .info-lista li:last-child {
-            border-bottom: none;
+        .formulario input:focus,
+        .formulario textarea:focus,
+        .caja input:focus {
+            border-color: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.12);
         }
 
-        /* CONTENIDO DERECHO (LISTADO) */
+        .formulario textarea {
+            resize: none;
+            height: 90px;
+        }
+
+        /* ELIMINACIÓN DE MARGEN INNECESARIO EN EL ÚLTIMO INPUT DE LA CAJA */
+        .caja input {
+            margin-bottom: 0;
+        }
+
+        /* BOTÓN MODERNO */
+        .formulario button {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .formulario button:hover {
+            background: #ffffff;
+            color: #0f141e;
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        /* COLUMNA DE TARJETAS */
         .contenido {
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
 
-        /* TARJETAS DE MEDICAMENTOS */
+        /* TARJETAS DE PACIENTES */
         .card {
             background: rgba(15, 22, 36, 0.4);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-left: 5px solid #ffffff; /* Detalle de línea lateral limpia */
-            padding: 25px;
+            border-left: 5px solid #ffffff;
             border-radius: 12px;
+            padding: 25px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             transition: 0.3s;
         }
 
         .card:hover {
             transform: translateY(-5px);
-            border-left-color: #93c5fd; 
+            border-left-color: #93c5fd;
             background: rgba(20, 29, 46, 0.45);
         }
 
@@ -253,9 +264,6 @@
             main h1 {
                 font-size: 2.2rem;
             }
-            .buscador input {
-                width: 100%;
-            }
         }
     </style>
 </head>
@@ -263,95 +271,129 @@
 <body>
 
 <header class="site-header">
-    <div class="logo">💊 Medicamentos</div>
+    <div class="logo">👨‍⚕️ Pacientes</div>
     <nav>
         <a href="index.html">Inicio</a>
-        <a href="Pacientes.html">Pacientes</a>
         <a href="Doctores.html">Doctores</a>
+        <a href="Medicamentos.html">Medicamentos</a>
     </nav>
 </header>
 
 <main>
 
-    <h1>Lista de Medicamentos</h1>
-
-    <div class="buscador">
-        <input type="text" id="buscar" placeholder="🔍 Buscar medicamento, paciente o ID...">
-    </div>
+    <h1>Lista de Pacientes</h1>
 
     <div class="contenedor">
 
         <div class="sidebar">
 
-            <div class="caja">
-                <h3>📋 Normativa de Stock</h3>
-                <ul class="info-lista">
-                    <li>• Receta obligatoria en controlados</li>
-                    <li>• Revisión periódica de caducidades</li>
-                    <li>• Reporte automatizado a almacén</li>
-                </ul>
+            <div class="formulario">
+                <h2>➕ Agregar Paciente</h2>
+                <input type="text" id="nombre" placeholder="Nombre">
+                <input type="text" id="edad" placeholder="Edad">
+                <input type="text" id="sexo" placeholder="Sexo">
+                <input type="text" id="ocupacion" placeholder="Ocupación">
+                <textarea id="diagnostico" placeholder="Diagnóstico"></textarea>
+                <textarea id="tratamiento" placeholder="Tratamiento"></textarea>
+                <button onclick="agregarPaciente()">Guardar Paciente</button>
             </div>
 
             <div class="caja">
-                <h3>⚠️ Control de Dosis</h3>
-                <ul class="info-lista">
-                    <li>• Verificar ID único por paciente</li>
-                    <li>• Restricción de doble asignación</li>
-                    <li>• Bitácora de consumo guardada</li>
-                </ul>
+                <input type="text" id="buscar" placeholder="🔍 Buscar paciente...">
             </div>
 
         </div>
 
-        <div class="contenido" id="listaMedicamentos">
+        <div class="contenido" id="listaPacientes">
 
             <div class="card">
-                <h2>Metformina</h2>
-                <p><strong>ID:</strong> M001</p>
-                <p><strong>Paciente:</strong> Carlos Ramírez Torres</p>
-                <p><strong>Consumo indicado:</strong> 850 mg cada 12 horas</p>
+                <h2>Carlos Ramírez Torres</h2>
+                <p><strong>Edad:</strong> 60 años</p>
+                <p><strong>Sexo:</strong> Masculino</p>
+                <p><strong>Ocupación:</strong> Jubilado</p>
+                <p><strong>Diagnóstico:</strong> Diabetes mal controlada</p>
+                <p><strong>Tratamiento:</strong> Ajuste de Metformina</p>
             </div>
 
             <div class="card">
-                <h2>Levotiroxina</h2>
-                <p><strong>ID:</strong> M003</p>
-                <p><strong>Paciente:</strong> Laura Méndez Castro</p>
-                <p><strong>Consumo indicado:</strong> 100 mcg cada 24 horas</p>
+                <h2>Ana Martínez Díaz</h2>
+                <p><strong>Edad:</strong> 27 años</p>
+                <p><strong>Sexo:</strong> Femenino</p>
+                <p><strong>Ocupación:</strong> Enfermera</p>
+                <p><strong>Diagnóstico:</strong> Infección urinaria</p>
+                <p><strong>Tratamiento:</strong> Nitrofurantoína</p>
             </div>
 
             <div class="card">
-                <h2>Paracetamol</h2>
-                <p><strong>ID:</strong> M004</p>
-                <p><strong>Paciente:</strong> Pedro Sánchez Molina</p>
-                <p><strong>Consumo indicado:</strong> 500 mg cada 8 horas</p>
+                <h2>Luis Fernández Soto</h2>
+                <p><strong>Edad:</strong> 50 años</p>
+                <p><strong>Sexo:</strong> Masculino</p>
+                <p><strong>Ocupación:</strong> Comerciante</p>
+                <p><strong>Diagnóstico:</strong> Angina estable</p>
+                <p><strong>Tratamiento:</strong> Estudios cardiológicos</p>
             </div>
 
             <div class="card">
-                <h2>Sumatriptán</h2>
-                <p><strong>ID:</strong> M005</p>
-                <p><strong>Paciente:</strong> Sofía Herrera León</p>
-                <p><strong>Consumo indicado:</strong> 50 mg al inicio de la crisis</p>
+                <h2>Laura Méndez Castro</h2>
+                <p><strong>Edad:</strong> 38 años</p>
+                <p><strong>Sexo:</strong> Femenino</p>
+                <p><strong>Ocupación:</strong> Abogada</p>
+                <p><strong>Diagnóstico:</strong> Hipotiroidismo</p>
+                <p><strong>Tratamiento:</strong> Levotiroxina</p>
             </div>
 
             <div class="card">
-                <h2>Sulfato ferroso</h2>
-                <p><strong>ID:</strong> M006</p>
-                <p><strong>Paciente:</strong> Valentina Rojas Núñez</p>
-                <p><strong>Consumo indicado:</strong> 325 mg cada 24 horas</p>
+                <h2>Pedro Sánchez Molina</h2>
+                <p><strong>Edad:</strong> 29 años</p>
+                <p><strong>Sexo:</strong> Masculino</p>
+                <p><strong>Ocupación:</strong> Ingeniero</p>
+                <p><strong>Diagnóstico:</strong> Faringitis aguda</p>
+                <p><strong>Tratamiento:</strong> Paracetamol</p>
             </div>
 
             <div class="card">
-                <h2>AINEs</h2>
-                <p><strong>ID:</strong> M007</p>
-                <p><strong>Paciente:</strong> Diego Morales Cruz</p>
-                <p><strong>Consumo indicado:</strong> Cada 8 horas según dolor</p>
+                <h2>Sofía Herrera León</h2>
+                <p><strong>Edad:</strong> 41 años</p>
+                <p><strong>Sexo:</strong> Femenino</p>
+                <p><strong>Ocupación:</strong> Secretaria</p>
+                <p><strong>Diagnóstico:</strong> Migraña</p>
+                <p><strong>Tratamiento:</strong> Sumatriptán</p>
             </div>
 
             <div class="card">
-                <h2>Nitratos</h2>
-                <p><strong>ID:</strong> M008</p>
-                <p><strong>Paciente:</strong> Luis Fernández Soto</p>
-                <p><strong>Consumo indicado:</strong> Según indicación médica en caso de dolor torácico</p>
+                <h2>Diego Morales Cruz</h2>
+                <p><strong>Edad:</strong> 55 años</p>
+                <p><strong>Sexo:</strong> Masculino</p>
+                <p><strong>Ocupación:</strong> Chofer</p>
+                <p><strong>Diagnóstico:</strong> Gonartrosis</p>
+                <p><strong>Tratamiento:</strong> Fisioterapia</p>
+            </div>
+
+            <div class="card">
+                <h2>Valentina Rojas Núñez</h2>
+                <p><strong>Edad:</strong> 24 años</p>
+                <p><strong>Sexo:</strong> Femenino</p>
+                <p><strong>Ocupación:</strong> Estudiante</p>
+                <p><strong>Diagnóstico:</strong> Anemia ferropénica</p>
+                <p><strong>Tratamiento:</strong> Sulfato ferroso</p>
+            </div>
+
+            <div class="card">
+                <h2>Fernando López García</h2>
+                <p><strong>Edad:</strong> 46 años</p>
+                <p><strong>Sexo:</strong> Masculino</p>
+                <p><strong>Ocupación:</strong> Maestro</p>
+                <p><strong>Diagnóstico:</strong> Hipertensión</p>
+                <p><strong>Tratamiento:</strong> Losartán y dieta baja en sal</p>
+            </div>
+
+            <div class="card">
+                <h2>Mariana Torres Vega</h2>
+                <p><strong>Edad:</strong> 33 años</p>
+                <p><strong>Sexo:</strong> Femenino</p>
+                <p><strong>Ocupación:</strong> Diseñadora gráfica</p>
+                <p><strong>Diagnóstico:</strong> Gastritis</p>
+                <p><strong>Tratamiento:</strong> Omeprazol y dieta blanda</p>
             </div>
 
         </div>
@@ -369,21 +411,96 @@
 </footer>
 
 <script>
-const buscador = document.getElementById("buscar");
 
-buscador.addEventListener("keyup", function(){
-    let texto = buscador.value.toLowerCase();
-    let tarjetas = document.querySelectorAll(".card");
+/* BUSCADOR */
+const buscar = document.getElementById("buscar");
 
-    tarjetas.forEach(function(card){
+buscar.addEventListener("keyup", function(){
+    let texto = buscar.value.toLowerCase();
+    let cards = document.querySelectorAll(".card");
+
+    cards.forEach(function(card){
         let contenido = card.textContent.toLowerCase();
+
         if(contenido.includes(texto)){
             card.style.display = "block";
-        } else {
+        }else{
             card.style.display = "none";
         }
     });
 });
+
+/* AGREGAR PACIENTE Y GUARDAR EN MONGODB */
+async function agregarPaciente(){
+
+    let nombre = document.getElementById("nombre").value;
+    let edad = document.getElementById("edad").value;
+    let sexo = document.getElementById("sexo").value;
+    let ocupacion = document.getElementById("ocupacion").value;
+    let diagnostico = document.getElementById("diagnostico").value;
+    let tratamiento = document.getElementById("tratamiento").value;
+
+    if(
+        nombre == "" || edad == "" || sexo == "" || 
+        ocupacion == "" || diagnostico == "" || tratamiento == ""
+    ){
+        alert("⚠️ Completa todos los campos");
+        return;
+    }
+
+    const datosPaciente = {
+        nombre,
+        edad,
+        sexo,
+        ocupacion,
+        diagnostico,
+        tratamiento
+    };
+
+    try {
+            
+        const respuesta = await fetch('/api/pacientes', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(datosPaciente)
+        });
+
+        const resultado = await respuesta.json();
+
+        if (respuesta.ok) {
+            let nuevaCard = document.createElement("div");
+            nuevaCard.classList.add("card");
+            nuevaCard.innerHTML = `
+                <h2>${nombre}</h2>
+                <p><strong>Edad:</strong> ${edad}</p>
+                <p><strong>Sexo:</strong> ${sexo}</p>
+                <p><strong>Ocupación:</strong> ${ocupacion}</p>
+                <p><strong>Diagnóstico:</strong> ${diagnostico}</p>
+                <p><strong>Tratamiento:</strong> ${tratamiento}</p>
+            `;
+
+            document.getElementById("listaPacientes").appendChild(nuevaCard);
+
+            /* LIMPIAR FORMULARIO */
+            document.getElementById("nombre").value = "";
+            document.getElementById("edad").value = "";
+            document.getElementById("sexo").value = "";
+            document.getElementById("ocupacion").value = "";
+            document.getElementById("diagnostico").value = "";
+            document.getElementById("tratamiento").value = "";
+
+            alert("✅ " + resultado.mensaje);
+        } else {
+            alert("❌ Error al guardar en el servidor: " + resultado.error);
+        }
+
+    } catch (error) {
+        console.error("Error en la petición:", error);
+        alert("⚠️ No se pudo conectar con el servidor backend. ¿Está encendido?");
+    }
+}
 </script>
 
 </body>
