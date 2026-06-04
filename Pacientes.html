@@ -17,15 +17,16 @@
             scroll-behavior: smooth;
         }
 
-        /* IMAGEN DE FONDO FIJA PARA TODA LA INTERFAZ */
+        /* FONDO INTERFAZ ORIGINAL */
         body {
             background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.45)), 
-                        url("imagen2.jpg") no-repeat center center fixed;
+                    url("imagen2.jpg") no-repeat center center fixed;
             background-size: cover;
             color: #ffffff;
+            min-height: 100vh;
         }
 
-        /* BARRA DE NAVEGACIÓN SUPERIOR TRANSLÚCIDA */
+        /* BARRA DE NAVEGACIÓN SUPERIOR */
         header.site-header {
             display: flex;
             justify-content: space-between;
@@ -48,7 +49,7 @@
             color: #ffffff;
             text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
         }
-
+    
         nav a {
             color: rgba(255, 255, 255, 0.85);
             text-decoration: none;
@@ -64,10 +65,10 @@
             border-bottom: 2px solid #ffffff;
         }
 
-        /* CONTENEDOR PRINCIPAL */
+        /* CONTENEDOR DE DOS COLUMNAS */
         main {
-            width: 90%;
-            max-width: 1300px;
+            width: 95%;
+            max-width: 1400px;
             margin: 140px auto 40px auto;
             padding: 20px;
         }
@@ -78,25 +79,17 @@
             font-size: 3rem;
             font-weight: 600;
             text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.6);
-            letter-spacing: -0.5px;
         }
 
-        /* DISTRIBUCIÓN EN REJILLA */
         .contenedor {
             display: grid;
-            grid-template-columns: 1fr 2.5fr;
+            grid-template-columns: 320px 1fr;
             gap: 30px;
+            align-items: start;
         }
 
-        /* BARRA LATERAL (SIDEBAR) */
-        .sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        /* CONTENEDORES ESTILO CRISTAL BLUR */
-        .formulario, .caja {
+        /* LADO IZQUIERDO: CONTENEDOR DEL FORMULARIO */
+        .sidebar-formulario {
             background: rgba(15, 22, 36, 0.4);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
@@ -106,154 +99,120 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
-        .formulario h2 {
+        .sidebar-formulario h3 {
+            margin-bottom: 20px;
             font-size: 1.3rem;
             font-weight: 500;
-            text-align: center;
-            margin-bottom: 20px;
             color: #ffffff;
         }
 
-        /* ENTRADAS DE TEXTO TRANSLÚCIDAS */
-        .formulario input,
-        .formulario textarea,
-        .caja input {
+        .form-registro input, .form-registro textarea {
             width: 100%;
-            padding: 12px 15px;
-            margin-bottom: 14px;
+            padding: 12px;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 8px;
-            font-size: 15px;
-            background: rgba(255, 255, 255, 0.07);
-            color: #ffffff;
+            color: white;
             outline: none;
-            transition: border-color 0.3s, background 0.3s;
+            font-size: 0.95rem;
+            transition: 0.3s;
         }
 
-        .formulario input::placeholder,
-        .formulario textarea::placeholder,
-        .caja input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
+        .form-registro textarea {
+            resize: vertical;
+            min-height: 80px;
         }
 
-        .formulario input:focus,
-        .formulario textarea:focus,
-        .caja input:focus {
+        .form-registro input::placeholder, .form-registro textarea::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .form-registro input:focus, .form-registro textarea:focus {
             border-color: rgba(255, 255, 255, 0.4);
-            background: rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.15);
         }
 
-        .formulario textarea {
-            resize: none;
-            height: 90px;
-        }
-
-        /* ELIMINACIÓN DE MARGEN INNECESARIO EN EL ÚLTIMO INPUT DE LA CAJA */
-        .caja input {
-            margin-bottom: 0;
-        }
-
-        /* BOTÓN MODERNO */
-        .formulario button {
+        .form-registro button {
             width: 100%;
             padding: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.1);
             color: white;
-            font-size: 16px;
+            border: 1px solid white;
+            border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
             transition: 0.3s;
         }
 
-        .formulario button:hover {
-            background: #ffffff;
-            color: #0f141e;
-            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+        .form-registro button:hover {
+            background: white;
+            color: #0f1624;
         }
 
-        /* COLUMNA DE TARJETAS */
-        .contenido {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        /* TARJETAS DE PACIENTES */
-        .card {
+        /* LADO DERECHO: LA TABLA SOLA Y LIMPIA */
+        .contenido-tabla-exclusiva {
             background: rgba(15, 22, 36, 0.4);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-left: 5px solid #ffffff;
-            border-radius: 12px;
+            border-radius: 15px;
             padding: 25px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            transition: 0.3s;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow-x: auto;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            border-left-color: #93c5fd;
-            background: rgba(20, 29, 46, 0.45);
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
         }
 
-        .card h2 {
-            font-size: 1.5rem;
-            color: #ffffff;
-            margin-bottom: 15px;
-            font-weight: 500;
+        th, td {
+            padding: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 1rem;
         }
 
-        .card p {
-            margin: 8px 0;
-            font-size: 1.02rem;
-            color: #e5e7eb;
-            line-height: 1.5;
-        }
-
-        .card p strong {
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: 500;
-            margin-right: 5px;
-        }
-
-        /* FOOTER TRANSPARENTE */
-        footer {
-            background: rgba(10, 15, 26, 0.5);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            color: #e5e7eb;
-            text-align: center;
-            padding: 50px 20px;
-            margin-top: 80px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 -5px 25px rgba(0,0,0,0.2);
-        }
-
-        footer h3 {
-            color: #ffffff;
-            font-size: 1.4rem;
-            margin-bottom: 20px;
+        th {
+            background: rgba(255, 255, 255, 0.05);
+            color: #93c5fd;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
             letter-spacing: 0.5px;
         }
 
-        footer p {
-            margin: 8px 0;
-            font-size: 0.95rem;
+        tr {
+            transition: background 0.2s;
         }
 
-        /* DISEÑO RESPONSIVO */
+        tr:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .btn-eliminar {
+            background: rgba(239, 68, 68, 0.15);
+            color: #fca5a5;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-eliminar:hover {
+            background: rgba(239, 68, 68, 0.7);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* RESPONSIVO */
         @media(max-width: 960px) {
             header.site-header {
                 padding: 20px;
                 flex-direction: column;
                 gap: 15px;
-            }
-            nav a {
-                margin: 0 10px;
-                font-size: 0.9rem;
             }
             main {
                 margin-top: 180px;
@@ -271,7 +230,7 @@
 <body>
 
 <header class="site-header">
-    <div class="logo">👨‍⚕️ Pacientes</div>
+    <div class="logo">🏥 Lista de Pacientes</div>
     <nav>
         <a href="index.html">Inicio</a>
         <a href="Doctores.html">Doctores</a>
@@ -281,226 +240,112 @@
 
 <main>
 
-    <h1>Lista de Pacientes</h1>
+    <h1>Registro de Pacientes</h1>
 
     <div class="contenedor">
 
-        <div class="sidebar">
-
-            <div class="formulario">
-                <h2>➕ Agregar Paciente</h2>
-                <input type="text" id="nombre" placeholder="Nombre">
-                <input type="text" id="edad" placeholder="Edad">
-                <input type="text" id="sexo" placeholder="Sexo">
-                <input type="text" id="ocupacion" placeholder="Ocupación">
-                <textarea id="diagnostico" placeholder="Diagnóstico"></textarea>
-                <textarea id="tratamiento" placeholder="Tratamiento"></textarea>
-                <button onclick="agregarPaciente()">Guardar Paciente</button>
-            </div>
-
-            <div class="caja">
-                <input type="text" id="buscar" placeholder="🔍 Buscar paciente...">
-            </div>
-
+        <div class="sidebar-formulario">
+            <h3>➕ Agregar Paciente</h3>
+            <form id="formPaciente" class="form-registro">
+                <input type="text" id="nombrePac" placeholder="Nombre" required>
+                <input type="text" id="edadPac" placeholder="Edad" required>
+                <input type="text" id="sexoPac" placeholder="Sexo" required>
+                <input type="text" id="ocupacionPac" placeholder="Ocupación" required>
+                <textarea id="diagPac" placeholder="Diagnóstico" required></textarea>
+                <textarea id="tratPac" placeholder="Tratamiento" required></textarea>
+                <button type="submit">Guardar Paciente</button>
+            </form>
         </div>
 
-        <div class="contenido" id="listaPacientes">
-
-            <div class="card">
-                <h2>Carlos Ramírez Torres</h2>
-                <p><strong>Edad:</strong> 60 años</p>
-                <p><strong>Sexo:</strong> Masculino</p>
-                <p><strong>Ocupación:</strong> Jubilado</p>
-                <p><strong>Diagnóstico:</strong> Diabetes mal controlada</p>
-                <p><strong>Tratamiento:</strong> Ajuste de Metformina</p>
-            </div>
-
-            <div class="card">
-                <h2>Ana Martínez Díaz</h2>
-                <p><strong>Edad:</strong> 27 años</p>
-                <p><strong>Sexo:</strong> Femenino</p>
-                <p><strong>Ocupación:</strong> Enfermera</p>
-                <p><strong>Diagnóstico:</strong> Infección urinaria</p>
-                <p><strong>Tratamiento:</strong> Nitrofurantoína</p>
-            </div>
-
-            <div class="card">
-                <h2>Luis Fernández Soto</h2>
-                <p><strong>Edad:</strong> 50 años</p>
-                <p><strong>Sexo:</strong> Masculino</p>
-                <p><strong>Ocupación:</strong> Comerciante</p>
-                <p><strong>Diagnóstico:</strong> Angina estable</p>
-                <p><strong>Tratamiento:</strong> Estudios cardiológicos</p>
-            </div>
-
-            <div class="card">
-                <h2>Laura Méndez Castro</h2>
-                <p><strong>Edad:</strong> 38 años</p>
-                <p><strong>Sexo:</strong> Femenino</p>
-                <p><strong>Ocupación:</strong> Abogada</p>
-                <p><strong>Diagnóstico:</strong> Hipotiroidismo</p>
-                <p><strong>Tratamiento:</strong> Levotiroxina</p>
-            </div>
-
-            <div class="card">
-                <h2>Pedro Sánchez Molina</h2>
-                <p><strong>Edad:</strong> 29 años</p>
-                <p><strong>Sexo:</strong> Masculino</p>
-                <p><strong>Ocupación:</strong> Ingeniero</p>
-                <p><strong>Diagnóstico:</strong> Faringitis aguda</p>
-                <p><strong>Tratamiento:</strong> Paracetamol</p>
-            </div>
-
-            <div class="card">
-                <h2>Sofía Herrera León</h2>
-                <p><strong>Edad:</strong> 41 años</p>
-                <p><strong>Sexo:</strong> Femenino</p>
-                <p><strong>Ocupación:</strong> Secretaria</p>
-                <p><strong>Diagnóstico:</strong> Migraña</p>
-                <p><strong>Tratamiento:</strong> Sumatriptán</p>
-            </div>
-
-            <div class="card">
-                <h2>Diego Morales Cruz</h2>
-                <p><strong>Edad:</strong> 55 años</p>
-                <p><strong>Sexo:</strong> Masculino</p>
-                <p><strong>Ocupación:</strong> Chofer</p>
-                <p><strong>Diagnóstico:</strong> Gonartrosis</p>
-                <p><strong>Tratamiento:</strong> Fisioterapia</p>
-            </div>
-
-            <div class="card">
-                <h2>Valentina Rojas Núñez</h2>
-                <p><strong>Edad:</strong> 24 años</p>
-                <p><strong>Sexo:</strong> Femenino</p>
-                <p><strong>Ocupación:</strong> Estudiante</p>
-                <p><strong>Diagnóstico:</strong> Anemia ferropénica</p>
-                <p><strong>Tratamiento:</strong> Sulfato ferroso</p>
-            </div>
-
-            <div class="card">
-                <h2>Fernando López García</h2>
-                <p><strong>Edad:</strong> 46 años</p>
-                <p><strong>Sexo:</strong> Masculino</p>
-                <p><strong>Ocupación:</strong> Maestro</p>
-                <p><strong>Diagnóstico:</strong> Hipertensión</p>
-                <p><strong>Tratamiento:</strong> Losartán y dieta baja en sal</p>
-            </div>
-
-            <div class="card">
-                <h2>Mariana Torres Vega</h2>
-                <p><strong>Edad:</strong> 33 años</p>
-                <p><strong>Sexo:</strong> Femenino</p>
-                <p><strong>Ocupación:</strong> Diseñadora gráfica</p>
-                <p><strong>Diagnóstico:</strong> Gastritis</p>
-                <p><strong>Tratamiento:</strong> Omeprazol y dieta blanda</p>
-            </div>
-
+        <div class="contenido-tabla-exclusiva">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Edad</th>
+                        <th>Sexo</th>
+                        <th>Ocupación</th>
+                        <th>Diagnóstico</th>
+                        <th>Tratamiento</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaBodyPacientes">
+                    </tbody>
+            </table>
         </div>
 
     </div>
 
 </main>
 
-<footer>
-    <h3>Datos del Alumno</h3>
-    <p><strong>Nombre:</strong> Kevin Raul Gonzalez Chavez</p>
-    <p><strong>No. Control:</strong> 23308051280594</p>
-    <p><strong>Grupo:</strong> 4-I</p>
-    <p><strong>Especialidad:</strong> Programación</p>
-</footer>
-
 <script>
+    const formPaciente = document.getElementById('formPaciente');
+    const tablaBodyPacientes = document.getElementById('tablaBodyPacientes');
 
-/* BUSCADOR */
-const buscar = document.getElementById("buscar");
-
-buscar.addEventListener("keyup", function(){
-    let texto = buscar.value.toLowerCase();
-    let cards = document.querySelectorAll(".card");
-
-    cards.forEach(function(card){
-        let contenido = card.textContent.toLowerCase();
-
-        if(contenido.includes(texto)){
-            card.style.display = "block";
-        }else{
-            card.style.display = "none";
+    // Inicializador por defecto (los datos de tu captura) para que empiece con contenido válido
+    const datosIniciales = [
+        { 
+            nombre: "er", 
+            edad: "df", 
+            sexo: "ds", 
+            ocupacion: "das", 
+            diagnostico: "sda", 
+            tratamiento: "fd" 
         }
-    });
-});
+    ];
 
-/* AGREGAR PACIENTE Y GUARDAR EN MONGODB */
-async function agregarPaciente(){
+    // Cargar lo guardado en LocalStorage o arrancar con los datos iniciales
+    let pacientes = JSON.parse(localStorage.getItem('pacientesRegistrados')) || datosIniciales;
 
-    let nombre = document.getElementById("nombre").value;
-    let edad = document.getElementById("edad").value;
-    let sexo = document.getElementById("sexo").value;
-    let ocupacion = document.getElementById("ocupacion").value;
-    let diagnostico = document.getElementById("diagnostico").value;
-    let tratamiento = document.getElementById("tratamiento").value;
+    // Función que redibuja exclusivamente las filas de la tabla
+    function refrescarTabla() {
+        tablaBodyPacientes.innerHTML = ''; // Limpiar el contenido viejo
 
-    if(
-        nombre == "" || edad == "" || sexo == "" || 
-        ocupacion == "" || diagnostico == "" || tratamiento == ""
-    ){
-        alert("⚠️ Completa todos los campos");
-        return;
-    }
-
-    const datosPaciente = {
-        nombre,
-        edad,
-        sexo,
-        ocupacion,
-        diagnostico,
-        tratamiento
-    };
-
-    try {
-            
-        const respuesta = await fetch('/api/pacientes', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(datosPaciente)
+        pacientes.forEach((pac, index) => {
+            const fila = document.createElement('tr');
+            fila.innerHTML = `
+                <td><strong>${pac.nombre}</strong></td>
+                <td>${pac.edad}</td>
+                <td>${pac.sexo}</td>
+                <td>${pac.ocupacion}</td>
+                <td>${pac.diagnostico}</td>
+                <td>${pac.tratamiento}</td>
+                <td><button class="btn-eliminar" onclick="quitarPaciente(${index})">Eliminar</button></td>
+            `;
+            tablaBodyPacientes.appendChild(fila);
         });
 
-        const resultado = await respuesta.json();
-
-        if (respuesta.ok) {
-            let nuevaCard = document.createElement("div");
-            nuevaCard.classList.add("card");
-            nuevaCard.innerHTML = `
-                <h2>${nombre}</h2>
-                <p><strong>Edad:</strong> ${edad}</p>
-                <p><strong>Sexo:</strong> ${sexo}</p>
-                <p><strong>Ocupación:</strong> ${ocupacion}</p>
-                <p><strong>Diagnóstico:</strong> ${diagnostico}</p>
-                <p><strong>Tratamiento:</strong> ${tratamiento}</p>
-            `;
-
-            document.getElementById("listaPacientes").appendChild(nuevaCard);
-
-            /* LIMPIAR FORMULARIO */
-            document.getElementById("nombre").value = "";
-            document.getElementById("edad").value = "";
-            document.getElementById("sexo").value = "";
-            document.getElementById("ocupacion").value = "";
-            document.getElementById("diagnostico").value = "";
-            document.getElementById("tratamiento").value = "";
-
-            alert("✅ " + resultado.mensaje);
-        } else {
-            alert("❌ Error al guardar en el servidor: " + resultado.error);
-        }
-
-    } catch (error) {
-        console.error("Error en la petición:", error);
-        alert("⚠️ No se pudo conectar con el servidor backend. ¿Está encendido?");
+        // Guardar automáticamente en el navegador para evitar pérdidas al reiniciar
+        localStorage.setItem('pacientesRegistrados', JSON.stringify(pacientes));
     }
-}
+
+    // Escucha el submit del formulario para recolectar información
+    formPaciente.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const nuevoPaciente = {
+            nombre: document.getElementById('nombrePac').value,
+            edad: document.getElementById('edadPac').value,
+            sexo: document.getElementById('sexoPac').value,
+            ocupacion: document.getElementById('ocupacionPac').value,
+            diagnostico: document.getElementById('diagPac').value,
+            tratamiento: document.getElementById('tratPac').value
+        };
+
+        pacientes.push(nuevoPaciente);
+        refrescarTabla();
+        formPaciente.reset(); // Vacía los inputs automáticamente
+    });
+
+    // Función del botón eliminar
+    function quitarPaciente(index) {
+        pacientes.splice(index, 1);
+        refrescarTabla();
+    }
+
+    // Llamada de arranque inicial
+    refrescarTabla();
 </script>
 
 </body>
