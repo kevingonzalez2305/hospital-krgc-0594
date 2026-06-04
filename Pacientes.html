@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pacientes</title>
     <style>
-        /* RESET GENERAL */
+        /* Estilos generales */
         * {
             margin: 0;
             padding: 0;
@@ -17,24 +17,21 @@
             scroll-behavior: smooth;
         }
 
-        /* FONDO INTERFAZ ORIGINAL */
         body {
             background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.45)), 
-                    url("imagen2.jpg") no-repeat center center fixed;
+                        url("imagen2.jpg") no-repeat center center fixed;
             background-size: cover;
             color: #ffffff;
-            min-height: 100vh;
         }
 
-        /* BARRA DE NAVEGACIÓN SUPERIOR */
+        /* Barra de navegación */
         header.site-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 25px 50px;
-            background: rgba(15, 20, 30, 0.3); 
+            background: rgba(15, 20, 30, 0.3);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             position: fixed;
             top: 0;
@@ -45,17 +42,14 @@
         .logo {
             font-size: 1.8rem;
             font-weight: bold;
-            letter-spacing: 1px;
             color: #ffffff;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
         }
-    
+
         nav a {
             color: rgba(255, 255, 255, 0.85);
             text-decoration: none;
             margin-left: 22px;
             font-size: 0.95rem;
-            font-weight: 500;
             transition: color 0.3s, border-bottom 0.3s;
             padding-bottom: 5px;
         }
@@ -65,10 +59,10 @@
             border-bottom: 2px solid #ffffff;
         }
 
-        /* CONTENEDOR DE DOS COLUMNAS */
+        /* Contenido principal */
         main {
-            width: 95%;
-            max-width: 1400px;
+            width: 90%;
+            max-width: 1300px;
             margin: 140px auto 40px auto;
             padding: 20px;
         }
@@ -83,78 +77,59 @@
 
         .contenedor {
             display: grid;
-            grid-template-columns: 320px 1fr;
+            grid-template-columns: 1fr 2.5fr;
             gap: 30px;
-            align-items: start;
         }
 
-        /* LADO IZQUIERDO: CONTENEDOR DEL FORMULARIO */
-        .sidebar-formulario {
+        /* Sidebar */
+        .sidebar {
             background: rgba(15, 22, 36, 0.4);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 15px;
             padding: 25px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
-        .sidebar-formulario h3 {
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-            font-weight: 500;
-            color: #ffffff;
+        .sidebar h3 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
         }
 
-        .form-registro input, .form-registro textarea {
+        .sidebar input, .sidebar textarea, .sidebar button {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            background: rgba(255, 255, 255, 0.08);
+            padding: 14px 15px;
+            margin-bottom: 15px; 
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 8px;
-            color: white;
+            font-size: 15px;
+            background: rgba(255, 255, 255, 0.07);
+            color: #ffffff;
             outline: none;
-            font-size: 0.95rem;
-            transition: 0.3s;
+            transition: border-color 0.3s, background 0.3s;
         }
-
-        .form-registro textarea {
+        .sidebar textarea {
             resize: vertical;
             min-height: 80px;
         }
 
-        .form-registro input::placeholder, .form-registro textarea::placeholder {
-            color: rgba(255, 255, 255, 0.4);
+        .sidebar input::placeholder, .sidebar textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
         }
 
-        .form-registro input:focus, .form-registro textarea:focus {
-            border-color: rgba(255, 255, 255, 0.4);
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .form-registro button {
-            width: 100%;
-            padding: 14px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 1px solid white;
-            border-radius: 8px;
-            font-weight: 600;
+        .sidebar button {
+            background: #ffffff;
+            color: #111622;
+            font-weight: bold;
             cursor: pointer;
-            transition: 0.3s;
+            margin-top: 10px;
+            margin-bottom: 0;
         }
 
-        .form-registro button:hover {
-            background: white;
-            color: #0f1624;
-        }
-
-        /* LADO DERECHO: LA TABLA SOLA Y LIMPIA */
-        .contenido-tabla-exclusiva {
+        /* Lista de pacientes */
+        .contenido {
             background: rgba(15, 22, 36, 0.4);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 15px;
             padding: 25px;
@@ -165,188 +140,146 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            text-align: left;
         }
 
         th, td {
             padding: 16px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            font-size: 1rem;
+            text-align: left;
         }
 
         th {
             background: rgba(255, 255, 255, 0.05);
-            color: #93c5fd;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 0.5px;
         }
 
-        tr {
-            transition: background 0.2s;
+        /* Footer */
+        footer {
+            background: rgba(10, 15, 26, 0.5);
+            backdrop-filter: blur(12px);
+            color: #e5e7eb;
+            text-align: center;
+            padding: 50px 20px;
+            margin-top: 80px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        tr:hover {
-            background: rgba(255, 255, 255, 0.03);
-        }
-
-        .btn-eliminar {
-            background: rgba(239, 68, 68, 0.15);
-            color: #fca5a5;
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            padding: 6px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .btn-eliminar:hover {
-            background: rgba(239, 68, 68, 0.7);
-            color: white;
-            border-color: transparent;
-        }
-
-        /* RESPONSIVO */
+        /* Responsive */
         @media(max-width: 960px) {
-            header.site-header {
-                padding: 20px;
-                flex-direction: column;
-                gap: 15px;
-            }
-            main {
-                margin-top: 180px;
-            }
             .contenedor {
                 grid-template-columns: 1fr;
-            }
-            main h1 {
-                font-size: 2.2rem;
             }
         }
     </style>
 </head>
-
 <body>
 
-<header class="site-header">
-    <div class="logo">🏥 Lista de Pacientes</div>
-    <nav>
-        <a href="index.html">Inicio</a>
-        <a href="Doctores.html">Doctores</a>
-        <a href="Medicamentos.html">Medicamentos</a>
-    </nav>
-</header>
+    <header class="site-header">
+        <div class="logo">👤 Pacientes</div>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="Doctores.html">Doctores</a>
+            <a href="Medicamentos.html">Medicamentos</a>
+        </nav>
+    </header>
 
-<main>
-
-    <h1>Registro de Pacientes</h1>
-
-    <div class="contenedor">
-
-        <div class="sidebar-formulario">
-            <h3>➕ Agregar Paciente</h3>
-            <form id="formPaciente" class="form-registro">
-                <input type="text" id="nombrePac" placeholder="Nombre" required>
-                <input type="text" id="edadPac" placeholder="Edad" required>
-                <input type="text" id="sexoPac" placeholder="Sexo" required>
-                <input type="text" id="ocupacionPac" placeholder="Ocupación" required>
-                <textarea id="diagPac" placeholder="Diagnóstico" required></textarea>
-                <textarea id="tratPac" placeholder="Tratamiento" required></textarea>
-                <button type="submit">Guardar Paciente</button>
-            </form>
-        </div>
-
-        <div class="contenido-tabla-exclusiva">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Edad</th>
-                        <th>Sexo</th>
-                        <th>Ocupación</th>
-                        <th>Diagnóstico</th>
-                        <th>Tratamiento</th>
-                        <th>Acción</th>
-                    </tr>
-                </thead>
-                <tbody id="tablaBodyPacientes">
+    <main>
+        <h1>Registro de Pacientes</h1>
+        <div class="contenedor">
+            <div class="sidebar">
+                <h3>Agregar Paciente</h3>
+                <form id="addPacienteForm">
+                    <input type="text" name="nombre" placeholder="Nombre" required>
+                    <input type="number" name="edad" placeholder="Edad" required>
+                    <input type="text" name="sexo" placeholder="Sexo" required>
+                    <input type="text" name="ocupacion" placeholder="Ocupación" required>
+                    <textarea name="diagnostico" placeholder="Diagnóstico" required></textarea>
+                    <textarea name="tratamiento" placeholder="Tratamiento" required></textarea>
+                    <button type="submit">Guardar</button>
+                </form>
+            </div>
+            <div class="contenido">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Edad</th>
+                            <th>Sexo</th>
+                            <th>Ocupación</th>
+                            <th>Diagnóstico</th>
+                            <th>Tratamiento</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaPacientes">
+                        <!-- Los pacientes se cargarán aquí desde el servidor -->
                     </tbody>
-            </table>
+                </table>
+            </div>
         </div>
+    </main>
 
-    </div>
+    <footer>
+        <h3>Datos del Alumno</h3>
+        <p><strong>Nombre:</strong> Kevin Raul Gonzalez Chavez</p>
+        <p><strong>No. Control:</strong> 23308051280594</p>
+    </footer>
 
-</main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('addPacienteForm');
+            const tablaPacientes = document.getElementById('tablaPacientes');
 
-<script>
-    const formPaciente = document.getElementById('formPaciente');
-    const tablaBodyPacientes = document.getElementById('tablaBodyPacientes');
+            const fetchPacientes = async () => {
+                try {
+                    const response = await fetch('/api/pacientes');
+                    const pacientes = await response.json();
+                    
+                    tablaPacientes.innerHTML = '';
+                    
+                    pacientes.forEach(paciente => {
+                        const fila = document.createElement('tr');
+                        fila.innerHTML = `
+                            <td>${paciente.nombre}</td>
+                            <td>${paciente.edad}</td>
+                            <td>${paciente.sexo}</td>
+                            <td>${paciente.ocupacion}</td>
+                            <td>${paciente.diagnostico}</td>
+                            <td>${paciente.tratamiento}</td>
+                        `;
+                        tablaPacientes.appendChild(fila);
+                    });
+                } catch (error) {
+                    console.error("Error al cargar pacientes: ", error);
+                    alert("No se pudieron cargar los pacientes.");
+                }
+            };
 
-    // Inicializador por defecto (los datos de tu captura) para que empiece con contenido válido
-    const datosIniciales = [
-        { 
-            nombre: "er", 
-            edad: "df", 
-            sexo: "ds", 
-            ocupacion: "das", 
-            diagnostico: "sda", 
-            tratamiento: "fd" 
-        }
-    ];
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData.entries());
+                
+                try {
+                    const response = await fetch('/api/pacientes', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
 
-    // Cargar lo guardado en LocalStorage o arrancar con los datos iniciales
-    let pacientes = JSON.parse(localStorage.getItem('pacientesRegistrados')) || datosIniciales;
+                    if (response.ok) {
+                        form.reset();
+                        fetchPacientes();
+                    } else {
+                        alert("Error al guardar el paciente.");
+                    }
+                } catch (error) {
+                    console.error("Error al guardar paciente: ", error);
+                    alert("No se pudo conectar con el servidor para guardar el paciente.");
+                }
+            });
 
-    // Función que redibuja exclusivamente las filas de la tabla
-    function refrescarTabla() {
-        tablaBodyPacientes.innerHTML = ''; // Limpiar el contenido viejo
-
-        pacientes.forEach((pac, index) => {
-            const fila = document.createElement('tr');
-            fila.innerHTML = `
-                <td><strong>${pac.nombre}</strong></td>
-                <td>${pac.edad}</td>
-                <td>${pac.sexo}</td>
-                <td>${pac.ocupacion}</td>
-                <td>${pac.diagnostico}</td>
-                <td>${pac.tratamiento}</td>
-                <td><button class="btn-eliminar" onclick="quitarPaciente(${index})">Eliminar</button></td>
-            `;
-            tablaBodyPacientes.appendChild(fila);
+            fetchPacientes();
         });
-
-        // Guardar automáticamente en el navegador para evitar pérdidas al reiniciar
-        localStorage.setItem('pacientesRegistrados', JSON.stringify(pacientes));
-    }
-
-    // Escucha el submit del formulario para recolectar información
-    formPaciente.addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const nuevoPaciente = {
-            nombre: document.getElementById('nombrePac').value,
-            edad: document.getElementById('edadPac').value,
-            sexo: document.getElementById('sexoPac').value,
-            ocupacion: document.getElementById('ocupacionPac').value,
-            diagnostico: document.getElementById('diagPac').value,
-            tratamiento: document.getElementById('tratPac').value
-        };
-
-        pacientes.push(nuevoPaciente);
-        refrescarTabla();
-        formPaciente.reset(); // Vacía los inputs automáticamente
-    });
-
-    // Función del botón eliminar
-    function quitarPaciente(index) {
-        pacientes.splice(index, 1);
-        refrescarTabla();
-    }
-
-    // Llamada de arranque inicial
-    refrescarTabla();
-</script>
+    </script>
 
 </body>
 </html>
